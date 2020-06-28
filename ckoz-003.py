@@ -16,7 +16,7 @@ class USBCKOZ:
     LXC_USB_ENDPOINT_OUT = 0x02 #// EP 2 OUT
 
     def connectToDevice(self):
-        print("Opening device Vendor: " + str(__.self.LXC_USB_VENDOR) + ", Product: " + str(self.LXC_USB_PRODUCT))
+        print("Opening device Vendor: " + str(.self.LXC_USB_VENDOR) + ", Product: " + str(self.LXC_USB_PRODUCT))
         self.device = usb.core.find(idVendor = self.LXC_USB_VENDOR, idProduct = self.LXC_USB_PRODUCT)
         if self.device is None:
             raise ValueError("Device not found")
