@@ -21,9 +21,9 @@ class USBCKOZ:
         if self.device is None:
             raise ValueError("Device not found")
         kernelActive = self.device.is_kernel_driver_active(self.LXC_USB_INTERFACE)
-        print(kernelActive)
-        if self.device.detach_kernel_driver(self.LXC_USB_INTERFACE) != 0:
-            raise ValueError("Cannot detach kernel")
+        if  kernelActive == True:
+           if self.device.detach_kernel_driver(self.LXC_USB_INTERFACE) != 0:
+               raise ValueError("Cannot detach kernel")
         output = self.device.set_configuration(1)    
         print("Set config result: " + str(output))   
         if output != 0:
