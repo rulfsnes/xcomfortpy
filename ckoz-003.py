@@ -27,9 +27,9 @@ if usbDevice is None:
 
 print("Device opened successfully")
 #set kernel driver mode
-ret = USBBackend.libusb_kernel_driver_active(usbDevice, ckoz3.LXC_USB_INTERFACE)
+ret = USBBackend.lib.libusb_kernel_driver_active(usbDevice, ckoz3.LXC_USB_INTERFACE)
 if ret == 1:
-    ret = USBBackend.libusb_detach_kernel_driver(usbDevice, ckoz3.LXC_USB_INTERFACE)
+    ret = USBBackend.lib.libusb_detach_kernel_driver(usbDevice, ckoz3.LXC_USB_INTERFACE)
     if ret != 0:
-        USBBackend.libusb_close(usbDevice)
+        USBBackend.lib.libusb_close(usbDevice)
         raise ValueError("Cannot detach device kernel driver")
