@@ -17,7 +17,7 @@ class USBCKOZ:
 
 ckoz3 = USBCKOZ()
 print("Testing usb connectivity")
-print("Opening device Vendor: " + ckoz3.LXC_USB_VENDOR + ", Product: " + ckoz3.LXC_USB_PRODUCT)
+print("Opening device Vendor: " + str(ckoz3.LXC_USB_VENDOR) + ", Product: " + str(ckoz3.LXC_USB_PRODUCT))
 
 usbDevice = usb.core.find(idVendor = ckoz3.LXC_USB_VENDOR, idProduct = ckoz3.LXC_USB_PRODUCT)
 
