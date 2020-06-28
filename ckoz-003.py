@@ -2,7 +2,6 @@
 
 import usb.core
 import usb.util
-import usb.backend.libusb1
 
 class USBCKOZ:
     """Definition of controlling ckoz3"""
@@ -16,20 +15,17 @@ class USBCKOZ:
     LXC_USB_ENDPOINT_IN = 0x81 #// EP 1 IN
     LXC_USB_ENDPOINT_OUT = 0x02 #// EP 2 OUT
 
+    def connectToDevice(self):
+        print("Opening device Vendor: " + str(__.self.LXC_USB_VENDOR) + ", Product: " + str(self.LXC_USB_PRODUCT))
+        self.device = usb.core.find(idVendor = self.LXC_USB_VENDOR, idProduct = self.LXC_USB_PRODUCT)
+        if self.device is None:
+            raise ValueError("Device not found")
+        if self.device.is_kernel_driver_active(self.LXC_USB_INTERFACE) == 1:
+           if self.device.detach_kernel_driver(self.LXC_USB_INTERFACE) != 0:
+               raise ValueError("Cannot detach kernel")
+
+        self.device.set_configuration(1)
+
 ckoz3 = USBCKOZ()
-print("Testing usb connectivity")
-print("Opening device Vendor: " + str(ckoz3.LXC_USB_VENDOR) + ", Product: " + str(ckoz3.LXC_USB_PRODUCT))
 
-usbDevice = usb.core.find(idVendor = ckoz3.LXC_USB_VENDOR, idProduct = ckoz3.LXC_USB_PRODUCT)
-USBBackend = usb.backend.libusb1.get_backend()
-if usbDevice is None:
-    raise ValueError("Device not found")
-
-print("Device opened successfully")
-#set kernel driver mode
-ret = USBBackend.lib.libusb_kernel_driver_active(usbDevice, ckoz3.LXC_USB_INTERFACE)
-if ret == 1:
-    ret = USBBackend.lib.libusb_detach_kernel_driver(usbDevice, ckoz3.LXC_USB_INTERFACE)
-    if ret != 0:
-        USBBackend.lib.libusb_close(usbDevice)
-        raise ValueError("Cannot detach device kernel driver")
+ckoz3.connectToDevice() 
