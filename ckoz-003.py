@@ -22,7 +22,7 @@ class USBCKOZ:
             raise ValueError("Device not found")
         kernelActive = self.device.is_kernel_driver_active(self.LXC_USB_INTERFACE)
         if  kernelActive == True:
-           self.device.detach_kernel_driver(self.LXC_USB_INTERFACE):
+           self.device.detach_kernel_driver(self.LXC_USB_INTERFACE)
 
         self.device.set_configuration(1)      
         usb.util.claim_interface(self.device, self.LXC_USB_INTERFACE)
