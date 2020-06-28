@@ -23,8 +23,9 @@ class USBCKOZ:
         if self.device.is_kernel_driver_active(self.LXC_USB_INTERFACE) == 1:
            if self.device.detach_kernel_driver(self.LXC_USB_INTERFACE) != 0:
                raise ValueError("Cannot detach kernel")
-
-        if self.device.set_configuration(1) != 0:
+        output = self.device.set_configuration(1)    
+        print("Set config result: " + str(output))   
+        if output != 0:
                 raise ValueError("Cannot set configuration on device")
         if usb.util.claim_interface(self.device, self.LXC_USB_INTERFACE) != 0:
                 raise ValueError("Cannot claim device")
