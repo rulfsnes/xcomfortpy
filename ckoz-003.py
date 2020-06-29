@@ -6,6 +6,7 @@ import struct
 
 class ckoZ3Data:
     size = 6
+    value = 0
     #Format:size  pktType  dataPoint opcode value   unused
     #        06    b1       01        0c    28    00 00 00 00         
     def __init__(self, dataPoint, opCode, packetType, value):
@@ -72,8 +73,9 @@ class CKOZ3:
     
     def setDimLevel(self, dataPoint, level):
         data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_PKT_TYPE_OUT)
+        print(data)
         print(data.data)    
-        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, data.data , self.LXC_SEND_TIMEOUT)
+        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x64\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
         print(out)
 
 
