@@ -13,7 +13,7 @@ class ckoZ3Data:
         self.opCode = opCode
         self.value = value 
         self.packetType = packetType
-        self.data = struct.pack('BBBBBBBBB',self.size, self.packetType, self.dataPoint,self.opCode,self.value,0x00,0x00,0x00,0x00)
+        self.data = struct.pack('BBBBBBBBB',self.size, self.packetType, self.dataPoint, self.opCode, self.value, 0x00,0x00,0x00,0x00)
   
     
 
@@ -71,9 +71,9 @@ class CKOZ3:
         print("Connected to device")
     
     def setDimLevel(self, dataPoint, level):
-        data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_OPCODE_DIM_SET)
+        data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_PKT_TYPE_OUT)
         print(data.data)
-        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, data.data , self.LXC_SEND_TIMEOUT)
+        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\x0c\x02\x0cd\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
         print(out)
 
 
