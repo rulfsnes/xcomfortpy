@@ -72,8 +72,8 @@ class CKOZ3:
     
     def setDimLevel(self, dataPoint, level):
         data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_PKT_TYPE_OUT)
-        print(data.data)
-        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\x0c\x02\x0cd\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
+        print(data.data)    
+        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, data.data , self.LXC_SEND_TIMEOUT)
         print(out)
 
 
