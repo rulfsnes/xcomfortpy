@@ -77,5 +77,5 @@ class CKOZ3:
 
 
 ckoz = CKOZ3()
-
+ckoz.connectToDevice()
 ckoz.setDimLevel(2, 100)
