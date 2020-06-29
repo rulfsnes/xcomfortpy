@@ -75,7 +75,7 @@ class CKOZ3:
         data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_PKT_TYPE_OUT)
         print(data)
         print(data.data)    
-        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x28\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
+        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x00\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
         print(out)
 
 
