@@ -2,6 +2,7 @@
 
 import usb.core
 import usb.util
+import usb.legacy
 import struct
 
 class ckoZ3Data:
@@ -73,12 +74,21 @@ class CKOZ3:
     
     def setDimLevel(self, dataPoint, level):
         data = ckoZ3Data(dataPoint=dataPoint, opCode=self.LXC_OPCODE_DIM_SET, value=level, packetType=self.LXC_PKT_TYPE_OUT)
+        print(struct.pack('B',self.LXC_OPCODE_DIM_SET))
         print(data)
-        print(data.data)    
-        out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x00\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
-        print(out)
+        print(data.data) 
+        deviceHandler = usb.legacy.DeviceHandle(self.device)
+        deviceHandler.interruptWrite(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x29\x00\x00\x00\x00', self.LXC_SEND_TIMEOUT)
+        #out = self.device.write(self.LXC_USB_ENDPOINT_OUT, '\x06\xb1\x02\x0c\x\x00\x00\x00\x00' , self.LXC_SEND_TIMEOUT)
+        #print(out)
 
 
 ckoz = CKOZ3()
 ckoz.connectToDevice()
 ckoz.setDimLevel(2, 100)
+
+
+
+
+
+
